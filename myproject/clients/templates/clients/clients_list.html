@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <h1>List of all Flask Bank clients</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <table class="table table-striped table-bordered table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Passport</th>
+          <th scope="col">Deposit Date</th>
+          <th scope="col">Deposit Return Date</th>
+          <th scope="col">Deposit Sum</th>
+          <th scope="col">Deposit Return Sum</th>
+          <th scope="col">Is Returned</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for client in clients  %}
+        <tr>
+          <th scope="row">{{loop.index}}</th>
+          <td>{{client.name}}</td>
+          <td>{{client.address}}</td>
+          <td>{{client.phone_number}}</td>
+          <td>{{client.passport}}</td>
+          <td>{{client.deposit_date}}</td>
+          <td>
+            {% if client.deposit_return_date is none %}
+                <strong>-</strong>
+            {% else %}
+                {{client.deposit_return_date}}
+            {% endif %}
+          </td>
+          <td>{{"{:.2f}".format(client.deposit_sum)}}</td>
+          <td>
+            {% if client.deposit_return_sum is none %}
+                <strong>-</strong>
+            {% else %}
+                {{"{:.2f}".format(client.deposit_return_sum)}}
+            {% endif %}
+          </td>
+          <td>{{client.deposit_return_mark}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

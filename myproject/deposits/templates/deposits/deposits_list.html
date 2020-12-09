@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <h1>List of all deposits</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Min Term</th>
+          <th scope="col">Min Sum</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for deposit in deposits  %}
+        <tr>
+          <th scope="row">{{loop.index}}</th>
+          <td>{{deposit.name}}</td>
+          <td>{{deposit.deposit_min_term}} months</td>
+          <td>{{"{:.2f}".format(deposit.deposit_min_sum)}} uah</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="jumbotron">
+    <h1>Welcome to Demo Flask Bank Application</h1>
+  </div>
+
+  <h4><a class="nav-item nav-link" href="{{ url_for('clients.deposit_clients') }}">Deposit Clients</a></h4>
+  <h4><a class="nav-item nav-link" href="{{ url_for('deposits.currencies') }}">Available Currencies</a></h4>
+
+{% endblock %}

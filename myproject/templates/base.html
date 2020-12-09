@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <base href="http://127.0.0.1:5000/">
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <script src="static/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="static/bankapp.css">
+
+    <title>Demo Flask Bank Application</title>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg bg-light">
+      <a class="navbar-brand" href="{{ url_for('index') }}">Flask Bank</a>
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="{{ url_for('index') }}">Home</a>
+            <a class="nav-item nav-link" href="{{ url_for('clients.clients_list') }}">Clients</a>
+            <a class="nav-item nav-link" href="{{ url_for('currencies.currencies_list') }}">Currencies</a>
+            <a class="nav-item nav-link" href="{{ url_for('deposits.deposits_list') }}">Deposits</a>
+        </div>
+    </nav>
+    <div class="container-fluid">
+    {% block content %}
+
+    {% endblock %}
+    </div>
+  </body>
+</html>

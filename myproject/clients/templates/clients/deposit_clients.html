@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <h1>List of Clients with Deposits</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-2">
+  <h4>Deposit filter</h4>
+
+    <form method="post">
+      {{ form.hidden_tag() }}
+      <h5>Type</h5>
+      {% for subfield in form.deposit_filter %}
+        <div class="form-check">
+          {{ subfield }}
+          {{ subfield.label }}
+        </div>
+      {% endfor %}
+      <h5>Is Returned</h5>
+      {% for subfield in form.deposit_mark_filter %}
+      <div class="form-check">
+        {{ subfield }}
+        {{ subfield.label }}
+      </div>
+    {% endfor %}
+      <input type="submit" name="Submit">
+    </form>
+  </div>
+  <div class="col-10">
+    <table class="table table-striped table-bordered table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Client Name</th>
+            <th scope="col">Client Address</th>
+            <th scope="col">Client Phone</th>
+            <th scope="col">Client Passport</th>
+            <th scope="col">Deposit Title</th>
+            <th scope="col">Deposit Min Term</th>
+            <th scope="col">Deposit Min Sum</th>
+            <th scope="col">Deposit Date</th>
+            <th scope="col">Deposit Return Date</th>
+            <th scope="col">Deposit Sum</th>
+            <th scope="col">Deposit Return Sum</th>
+            <th scope="col">Is Returned</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for client in clients  %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{client.name}}</td>
+            <td>{{client.address}}</td>
+            <td>{{client.phone_number}}</td>
+            <td>{{client.passport}}</td>
+            <td>{{client.deposit.name}}</td>
+            <td>{{client.deposit.deposit_min_term}} months</td>
+            <td>{{"{:.2f}".format(client.deposit.deposit_min_sum)}} uah</td>
+            <td>{{client.deposit_date}}</td>
+            <td>
+              {% if client.deposit_return_date is none %}
+                  <strong>-</strong>
+              {% else %}
+                  {{client.deposit_return_date}}
+              {% endif %}
+            </td>
+            <td>{{"{:.2f}".format(client.deposit_sum)}}</td>
+            <td>
+              {% if client.deposit_return_sum is none %}
+                  <strong>-</strong>
+              {% else %}
+                  {{"{:.2f}".format(client.deposit_return_sum)}}
+              {% endif %}
+            </td>
+            <td>{{client.deposit_return_mark}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+{% endblock %}

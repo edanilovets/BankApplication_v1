@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <h1>Available Currencies</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-2">
+  <h4>Currency filter</h4>
+
+    <form method="post">
+      {{ form.hidden_tag() }}
+      {% for subfield in form.currency_filter %}
+        <div class="form-check">
+          {{ subfield }}
+          {{ subfield.label }}
+        </div>
+      {% endfor %}
+      <input type="submit" name="Submit">
+    </form>
+  </div>
+  <div class="col-10">
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Deposit Title</th>
+            <th scope="col">Deposit Min Term</th>
+            <th scope="col">Deposit Min Sum</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Exchange Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for deposit in deposits  %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{deposit.name}}</td>
+            <td>{{deposit.deposit_min_term}} months</td>
+            <td>{{"{:.2f}".format(deposit.deposit_min_sum)}} uah</td>
+            <td>{{deposit.currency.name}}</td>
+            <td>{{"{:.2f}".format(deposit.currency.exchange_rate)}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+</div>
+{% endblock %}
